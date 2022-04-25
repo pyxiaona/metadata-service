@@ -18,7 +18,7 @@ pipeline {
             steps {
                 sh '''
                     echo "building the docker image ......."
-                    docker build -t "${DOCKER_IMAGE_NAME}" -f ./build.Dockerfile .
+                    docker build -t "${DOCKER_IMAGE_NAME}" -f ./Dockerfile-multi .
                 '''
             }
         }
