@@ -1,0 +1,14 @@
+#build stage
+FROM maven as build
+WORKDIR /usr/app/
+COPY pom.xml .
+COPY src  ./src
+RUN  mvn package -DskipTest
+
+
+# run stage
+FROM openjdk:alpine
+COPY --from=build /usr/app/target/metadata-service.jar .
+EXPOSE 8080
+#CMD  ["java", "-jar", "metadata-service.jar"]
+ENTRYPOINT java -jar metadata-service.jar
